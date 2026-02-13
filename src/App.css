@@ -1,0 +1,3028 @@
+
+:root {
+    /* Primary Colors */
+    --primary-color: #2a628f; /* Dark Teal/Blue */
+    --primary-light: #4a82b0;
+    --primary-dark: #1f4b6d;
+
+    /* Accent Colors */
+    --accent-color: #ffc107; /* Yellow */
+    --accent-light: #ffd54f;
+    --accent-dark: #cc9a00;
+
+    /* Status Colors */
+    --status-green: #28a745; /* Approved / Completed / Delivered */
+    --status-blue: #007bff; /* In Progress / Accepted / Ironing */
+    --status-orange: #fd7e14; /* Pending / Action Required / Ready */
+    --status-red: #dc3545; /* Rejected / SLA Breach / Blocked */
+    --status-purple: #6f42c1; /* Exception / Escalation */
+    --status-grey: #6c757d; /* Draft / Archived / Created */
+
+    /* Neutral Colors */
+    --text-color-primary: #343a40; /* Dark grey for main text */
+    --text-color-secondary: #6c757d; /* Lighter grey for secondary text */
+    --text-color-light: #f8f9fa; /* Off-white for text on dark backgrounds */
+    --bg-color-light: #f4f7f6; /* Light grey background */
+    --bg-color-card: #ffffff; /* White card background */
+    --border-color: #e0e0e0; /* Light grey border */
+    --shadow-color: rgba(0, 0, 0, 0.08); /* Subtle shadow */
+
+    /* Typography */
+    --font-family-sans: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --font-size-base: 16px;
+    --line-height-base: 1.6;
+
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+
+    /* Border Radius */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+}
+
+/* Base Styles */
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family-sans);
+    color: var(--text-color-primary);
+    background-color: var(--bg-color-light);
+    line-height: var(--line-height-base);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    font-weight: 600;
+    color: var(--text-color-primary);
+}
+
+h1 { font-size: 2.5em; }
+h2 { font-size: 2em; }
+h3 { font-size: 1.5em; }
+h4 { font-size: 1.25em; }
+
+p {
+    margin-top: 0;
+    margin-bottom: var(--spacing-sm);
+}
+
+.text-muted {
+    color: var(--text-color-secondary);
+    font-size: 0.9em;
+}
+
+/* App Container */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+.header {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px var(--shadow-color);
+    z-index: 1000;
+    position: sticky;
+    top: 0;
+}
+
+.header-brand {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--text-color-light);
+    text-decoration: none;
+}
+
+.header-nav {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.header-nav a, .header-user span, .header-user button {
+    color: var(--text-color-light);
+    text-decoration: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    display: flex;
+    align-items: center;
+}
+
+.header-nav a:hover, .header-user button:hover {
+    background-color: var(--primary-light);
+    transform: translateY(-1px);
+}
+
+.header-user {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.header-user .user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9em;
+    color: var(--primary-dark);
+}
+
+.header-notification-icon {
+    position: relative;
+    cursor: pointer;
+}
+
+.header-notification-icon .badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: var(--accent-color);
+    color: var(--primary-dark);
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.7em;
+    font-weight: bold;
+}
+
+/* Main Content Area */
+.main-content {
+    flex-grow: 1;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Dashboard Layout */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.dashboard-section {
+    background-color: var(--bg-color-card);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 2px 15px var(--shadow-color);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Card System */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.card {
+    background-color: var(--bg-color-card);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 2px 10px var(--shadow-color);
+    padding: var(--spacing-md);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border-color); /* Default border */
+}
+
+.card:hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-bottom: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.card-body {
+    flex-grow: 1;
+    font-size: 0.95em;
+    color: var(--text-color-secondary);
+}
+
+.card-footer {
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid var(--border-color);
+    margin-top: var(--spacing-sm);
+    font-size: 0.85em;
+    color: var(--text-color-secondary);
+}
+
+/* Colorful Card Design System */
+/* Base for status coloring */
+.card.status-created, .card.status-draft {
+    border-left: 5px solid var(--status-grey);
+    background-color: rgba(108, 117, 125, 0.05); /* Grey tint */
+}
+.card.status-created .card-header, .card.status-draft .card-header { color: var(--status-grey); border-bottom-color: rgba(108, 117, 125, 0.2); }
+
+.card.status-accepted, .card.status-ironing {
+    border-left: 5px solid var(--status-blue);
+    background-color: rgba(0, 123, 255, 0.05); /* Blue tint */
+}
+.card.status-accepted .card-header, .card.status-ironing .card-header { color: var(--status-blue); border-bottom-color: rgba(0, 123, 255, 0.2); }
+
+.card.status-ready, .card.status-pending {
+    border-left: 5px solid var(--status-orange);
+    background-color: rgba(253, 126, 20, 0.05); /* Orange tint */
+}
+.card.status-ready .card-header, .card.status-pending .card-header { color: var(--status-orange); border-bottom-color: rgba(253, 126, 20, 0.2); }
+
+.card.status-delivered, .card.status-picked, .card.status-completed, .card.status-approved {
+    border-left: 5px solid var(--status-green);
+    background-color: rgba(40, 167, 69, 0.05); /* Green tint */
+}
+.card.status-delivered .card-header, .card.status-picked .card-header, .card.status-completed .card-header, .card.status-approved .card-header { color: var(--status-green); border-bottom-color: rgba(40, 167, 69, 0.2); }
+
+
+.card.status-rejected, .card.status-breached {
+    border-left: 5px solid var(--status-red);
+    background-color: rgba(220, 53, 69, 0.05); /* Red tint */
+}
+.card.status-rejected .card-header, .card.status-breached .card-header { color: var(--status-red); border-bottom-color: rgba(220, 53, 69, 0.2); }
+
+.card.status-escalated, .card.status-exception {
+    border-left: 5px solid var(--status-purple);
+    background-color: rgba(111, 66, 193, 0.05); /* Purple tint */
+}
+.card.status-escalated .card-header, .card.status-exception .card-header { color: var(--status-purple); border-bottom-color: rgba(111, 66, 193, 0.2); }
+
+
+/* KPI Cards */
+.kpi-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: var(--spacing-lg);
+    height: 150px;
+}
+
+.kpi-card-value {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-sm);
+}
+
+.kpi-card-title {
+    font-size: 1.1em;
+    color: var(--text-color-primary);
+    font-weight: 500;
+}
+
+.kpi-card-footer {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.9em;
+    color: var(--text-color-secondary);
+}
+
+.kpi-card-footer.positive { color: var(--status-green); }
+.kpi-card-footer.negative { color: var(--status-red); }
+
+/* Charts (Placeholders) */
+.chart-container {
+    height: 300px; /* Example height */
+    width: 100%;
+    background-color: var(--bg-color-card);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 2px 10px var(--shadow-color);
+    padding: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color-secondary);
+    font-style: italic;
+    font-size: 1.1em;
+}
+
+.chart-container h3 {
+    width: 100%;
+    text-align: center;
+    color: var(--text-color-primary);
+    font-weight: 600;
+}
+
+/* Activity Feed */
+.activity-feed {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.activity-item {
+    display: flex;
+    align-items: flex-start;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-icon {
+    margin-right: var(--spacing-md);
+    color: var(--primary-color);
+    font-size: 1.2em;
+}
+
+.activity-details {
+    flex-grow: 1;
+}
+
+.activity-details p {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+.activity-timestamp {
+    font-size: 0.8em;
+    color: var(--text-color-secondary);
+}
+
+.status-tag {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: var(--border-radius-sm);
+    font-size: 0.75em;
+    font-weight: 600;
+    margin-left: var(--spacing-sm);
+    text-transform: capitalize;
+}
+
+.status-tag-created, .status-tag-draft { background-color: var(--status-grey); color: var(--text-color-light); }
+.status-tag-accepted, .status-tag-ironing { background-color: var(--status-blue); color: var(--text-color-light); }
+.status-tag-ready, .status-tag-pending { background-color: var(--status-orange); color: var(--text-color-light); }
+.status-tag-delivered, .status-tag-picked, .status-tag-completed, .status-tag-approved { background-color: var(--status-green); color: var(--text-color-light); }
+.status-tag-rejected, .status-tag-breached { background-color: var(--status-red); color: var(--text-color-light); }
+.status-tag-escalated, .status-tag-exception { background-color: var(--status-purple); color: var(--text-color-light); }
+
+
+/* Kanban Task Queue */
+.kanban-board {
+    display: flex;
+    gap: var(--spacing-md);
+    overflow-x: auto;
+    padding-bottom: var(--spacing-sm);
+}
+
+.kanban-column {
+    flex: 0 0 300px; /* Fixed width for columns */
+    background-color: var(--bg-color-light);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-md);
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+}
+
+.kanban-column h4 {
+    margin-bottom: var(--spacing-md);
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.task-card {
+    background-color: var(--bg-color-card);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 1px 5px rgba(0,0,0,0.08);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    cursor: grab;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-left: 4px solid var(--border-color); /* Accent border */
+}
+
+.task-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.task-card h5 {
+    margin: 0 0 var(--spacing-xs);
+    font-size: 1em;
+    color: var(--text-color-primary);
+}
+
+.task-card p {
+    font-size: 0.85em;
+    color: var(--text-color-secondary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.task-card-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75em;
+    color: var(--text-color-secondary);
+}
+
+/* Specific task card status colors (similar to general cards, but for small cards) */
+.task-card.status-created { border-left-color: var(--status-grey); }
+.task-card.status-accepted { border-left-color: var(--status-blue); }
+.task-card.status-ironing { border-left-color: var(--status-blue); }
+.task-card.status-ready { border-left-color: var(--status-orange); }
+.task-card.status-delivered { border-left-color: var(--status-green); }
+.task-card.status-rejected { border-left-color: var(--status-red); }
+
+
+/* Full-screen View */
+.full-screen-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-color-light);
+    z-index: 1001; /* Above header */
+    overflow-y: auto;
+    padding: var(--spacing-xl);
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.full-screen-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    gap: var(--spacing-sm);
+}
+
+.full-screen-header h2 {
+    margin: 0;
+    flex-grow: 1;
+    color: var(--primary-color);
+}
+
+.back-button {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 1em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-weight: 500;
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-md);
+    transition: background-color 0.2s ease;
+}
+
+.back-button:hover {
+    background-color: rgba(42, 98, 143, 0.1);
+}
+
+
+/* Detail View - Order Detail */
+.detail-view-content {
+    background-color: var(--bg-color-card);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: var(--spacing-xl);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hero-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.hero-info h3 {
+    margin: 0;
+    font-size: 1.8em;
+    color: var(--primary-color);
+}
+
+.hero-info p {
+    margin: 0;
+    color: var(--text-color-secondary);
+}
+
+.status-badge {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    font-weight: 600;
+    color: var(--text-color-light);
+    text-transform: capitalize;
+}
+.status-badge-created, .status-badge-draft { background-color: var(--status-grey); }
+.status-badge-accepted, .status-badge-ironing { background-color: var(--status-blue); }
+.status-badge-ready, .status-badge-pending { background-color: var(--status-orange); }
+.status-badge-delivered, .status-badge-picked, .status-badge-completed, .status-badge-approved { background-color: var(--status-green); }
+.status-badge-rejected, .status-badge-breached { background-color: var(--status-red); }
+.status-badge-escalated, .status-badge-exception { background-color: var(--status-purple); }
+
+
+.delivery-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    background-color: var(--primary-light);
+    color: var(--text-color-light);
+    padding: 5px 10px;
+    border-radius: var(--border-radius-md);
+    font-size: 0.85em;
+    font-weight: 500;
+    margin-top: var(--spacing-sm);
+    text-transform: capitalize;
+}
+
+.detail-sections {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+}
+
+.detail-section-card {
+    background-color: var(--bg-color-light);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md);
+}
+
+.detail-section-card h4 {
+    color: var(--primary-dark);
+    margin-bottom: var(--spacing-md);
+    font-weight: 600;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-xs) 0;
+    border-bottom: 1px dashed rgba(0,0,0,0.05);
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-item-label {
+    font-weight: 500;
+    color: var(--text-color-primary);
+}
+
+.detail-item-value {
+    color: var(--text-color-secondary);
+    text-align: right;
+}
+
+.items-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.items-list li {
+    padding: var(--spacing-xs) 0;
+    border-bottom: 1px dashed rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+}
+
+.items-list li:last-child {
+    border-bottom: none;
+}
+
+/* Workflow Tracker */
+.workflow-stepper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: var(--spacing-xl) 0;
+    padding: 0 var(--spacing-lg); /* Padding for lines */
+    position: relative;
+}
+
+.stepper-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.stepper-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--border-color);
+    color: var(--text-color-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    margin-bottom: var(--spacing-sm);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.stepper-label {
+    font-size: 0.85em;
+    font-weight: 500;
+    color: var(--text-color-secondary);
+    transition: color 0.3s ease;
+}
+
+.stepper-item.completed .stepper-icon {
+    background-color: var(--status-green);
+    color: var(--text-color-light);
+    transform: scale(1.1);
+}
+
+.stepper-item.completed .stepper-label {
+    color: var(--status-green);
+}
+
+.stepper-item.current .stepper-icon {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    box-shadow: 0 0 0 4px rgba(42, 98, 143, 0.3); /* Pulse effect */
+    animation: pulse 1.5s infinite;
+}
+
+.stepper-item.current .stepper-label {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.stepper-item.sla-breached .stepper-icon {
+    background-color: var(--status-red);
+    color: var(--text-color-light);
+    animation: shake 0.5s infinite alternate;
+}
+
+.stepper-item.sla-breached .stepper-label {
+    color: var(--status-red);
+    font-weight: 600;
+}
+
+.stepper-line {
+    position: absolute;
+    top: 20px; /* Aligned with center of icons */
+    left: calc(var(--spacing-lg) + 20px);
+    right: calc(var(--spacing-lg) + 20px);
+    height: 4px;
+    background-color: var(--border-color);
+    z-index: 0;
+}
+
+.stepper-line-progress {
+    height: 100%;
+    background-color: var(--status-green);
+    width: 0%;
+    transition: width 0.5s ease-out;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(42, 98, 143, 0.4); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(42, 98, 143, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(42, 98, 143, 0); }
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-3px); }
+    50% { transform: translateX(3px); }
+    75% { transform: translateX(-3px); }
+    100% { transform: translateX(0); }
+}
+
+
+/* Sticky Actions */
+.sticky-actions {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-color-card);
+    padding: var(--spacing-md) var(--spacing-xl);
+    box-shadow: 0 -2px 10px var(--shadow-color);
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-md);
+    border-top-left-radius: var(--border-radius-lg);
+    border-top-right-radius: var(--border-radius-lg);
+    z-index: 100; /* Above regular content, below full-screen */
+}
+
+/* Buttons */
+.btn {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--border-radius-md);
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-light);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(42, 98, 143, 0.1);
+    transform: translateY(-1px);
+}
+
+.btn-action {
+    background-color: var(--accent-color);
+    color: var(--primary-dark);
+}
+
+.btn-action:hover {
+    background-color: var(--accent-light);
+    transform: translateY(-1px);
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Forms */
+.form-container {
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: var(--bg-color-card);
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.form-step-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-xl);
+    position: relative;
+    padding: 0 var(--spacing-md);
+}
+
+.form-step {
+    flex: 1;
+    text-align: center;
+    position: relative;
+}
+
+.form-step-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--border-color);
+    color: var(--text-color-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    margin: 0 auto var(--spacing-sm);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.form-step-label {
+    font-size: 0.9em;
+    color: var(--text-color-secondary);
+}
+
+.form-step.active .form-step-circle {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+}
+
+.form-step.active .form-step-label {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.form-step.completed .form-step-circle {
+    background-color: var(--status-green);
+    color: var(--text-color-light);
+}
+
+.form-step-line {
+    position: absolute;
+    top: 18px; /* Aligned with center of circles */
+    left: calc(50% + 18px);
+    right: calc(50% + 18px);
+    height: 2px;
+    background-color: var(--border-color);
+    z-index: 0;
+}
+
+.form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    font-weight: 500;
+    color: var(--text-color-primary);
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: var(--spacing-md);
+    color: var(--text-color-secondary);
+}
+
+.input-field {
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) 48px; /* Adjusted padding for icon */
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    font-size: 1em;
+    color: var(--text-color-primary);
+    background-color: var(--bg-color-light);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(42, 98, 143, 0.2);
+    background-color: var(--bg-color-card);
+}
+
+.input-field.error {
+    border-color: var(--status-red);
+}
+
+.validation-error {
+    color: var(--status-red);
+    font-size: 0.85em;
+    margin-top: var(--spacing-xs);
+}
+
+textarea.input-field {
+    min-height: 100px;
+    resize: vertical;
+    padding-left: var(--spacing-md); /* No icon for textarea usually */
+}
+
+select.input-field {
+    appearance: none; /* Remove default arrow */
+    background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%236c757d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3e%3cpolyline points="6 9 12 15 18 9"%3e%3c/polyline%3e%3c/svg%3e');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 40px;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.checkbox-group input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.checkbox-group input[type="checkbox"]:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.checkbox-group input[type="checkbox"]:checked::after {
+    content: '✓';
+    color: white;
+    font-size: 14px;
+    position: absolute;
+}
+
+.radio-group {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    cursor: pointer;
+}
+
+.radio-option input[type="radio"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s ease;
+}
+
+.radio-option input[type="radio"]:checked {
+    border-color: var(--primary-color);
+}
+
+.radio-option input[type="radio"]:checked::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+}
+
+
+/* Form actions */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+}
+
+/* Form confirmation */
+.form-success-animation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    text-align: center;
+}
+
+.success-check-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: var(--status-green);
+    color: var(--text-color-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3em;
+    margin-bottom: var(--spacing-lg);
+    animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.05); opacity: 1; }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
+
+.form-success-animation h3 {
+    color: var(--status-green);
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Global Search */
+.global-search-container {
+    position: relative;
+    flex-grow: 1;
+    max-width: 400px;
+    margin-left: var(--spacing-lg);
+}
+
+.global-search-input {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md) var(--spacing-sm) 40px;
+    border-radius: var(--border-radius-md);
+    border: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-color-light);
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
+}
+
+.global-search-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.global-search-input:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.global-search-icon {
+    position: absolute;
+    left: var(--spacing-md);
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+
+/* Filters Section */
+.filters-section {
+    background-color: var(--bg-color-card);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 2px 10px var(--shadow-color);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.filter-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    font-weight: 500;
+    color: var(--text-color-primary);
+}
+
+.filter-group select,
+.filter-group input[type="date"] {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    background-color: var(--bg-color-light);
+}
+
+/* Toast Notification */
+.toast-notification {
+    position: fixed;
+    bottom: var(--spacing-xl);
+    right: var(--spacing-xl);
+    background-color: var(--bg-color-card);
+    color: var(--text-color-primary);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    min-width: 280px;
+    z-index: 2000;
+    transform: translateY(100px);
+    opacity: 0;
+    animation: slideInUp 0.4s ease-out forwards, fadeOut 0.4s ease-in 4s forwards;
+}
+
+.toast-notification.toast-info { border-left: 5px solid var(--primary-color); }
+.toast-notification.toast-success { border-left: 5px solid var(--status-green); }
+.toast-notification.toast-action { border-left: 5px solid var(--accent-color); }
+.toast-notification.toast-error { border-left: 5px solid var(--status-red); }
+
+@keyframes slideInUp {
+    from { transform: translateY(100px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; transform: translateY(100px); }
+}
+
+.toast-icon {
+    font-size: 1.5em;
+}
+.toast-info .toast-icon { color: var(--primary-color); }
+.toast-success .toast-icon { color: var(--status-green); }
+.toast-action .toast-icon { color: var(--accent-color); }
+.toast-error .toast-icon { color: var(--status-red); }
+
+
+/* Auth Screen */
+.auth-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: var(--text-color-light);
+}
+
+.auth-card {
+    background-color: var(--bg-color-card);
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: var(--text-color-primary);
+    width: 100%;
+    max-width: 400px;
+}
+
+.auth-card h2 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-xl);
+}
+
+.auth-role-selection {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.role-button {
+    width: 100%;
+    padding: var(--spacing-lg);
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    border: none;
+    border-radius: var(--border-radius-md);
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.role-button:hover {
+    background-color: var(--primary-light);
+    transform: translateY(-2px);
+}
+
+/* Utility Classes for Flexbox/Grid */
+.flex-row { display: flex; flex-direction: row; }
+.flex-col { display: flex; flex-direction: column; }
+.justify-between { justify-content: space-between; }
+.justify-end { justify-content: flex-end; }
+.items-center { align-items: center; }
+.gap-md { gap: var(--spacing-md); }
+.gap-lg { gap: var(--spacing-lg); }
+.mt-md { margin-top: var(--spacing-md); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.p-lg { padding: var(--spacing-lg); }
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: var(--spacing-md);
+    }
+    .header-nav {
+        width: 100%;
+        justify-content: space-around;
+        margin-top: var(--spacing-md);
+    }
+    .header-user {
+        margin-top: var(--spacing-md);
+        width: 100%;
+        justify-content: flex-end;
+    }
+    .global-search-container {
+        margin-left: 0;
+        width: 100%;
+        order: 3;
+        margin-top: var(--spacing-md);
+    }
+    .main-content {
+        padding: var(--spacing-md);
+    }
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+    .full-screen-view {
+        padding: var(--spacing-md);
+    }
+    .detail-view-content {
+        padding: var(--spacing-lg);
+    }
+    .hero-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+    .workflow-stepper {
+        flex-direction: column;
+        padding: 0;
+        align-items: stretch;
+    }
+    .stepper-item {
+        margin-bottom: var(--spacing-lg);
+    }
+    .stepper-line {
+        display: none; /* Hide vertical lines on mobile, or redesign for vertical */
+    }
+    .sticky-actions {
+        padding: var(--spacing-md);
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .form-step-indicator {
+        flex-wrap: wrap;
+    }
+    .form-step {
+        flex-basis: 50%; /* Two steps per row */
+        margin-bottom: var(--spacing-md);
+    }
+    .form-step-line {
+        display: none;
+    }
+}
+
+/* Accessibility Focus States */
+a:focus, button:focus, .card:focus, .input-field:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+input[type="checkbox"]:focus, input[type="radio"]:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+/* Ensure elements are keyboard navigable */
+[tabindex="-1"]:focus { outline: none; }
+.card, .btn, .header-nav a, .role-button, .back-button {
+    tab-index: 0;
+}
+----- App.jsx -----
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+
+// --- Icon Components (Simple SVG for demonstration) ---
+const HomeIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>;
+const OrdersIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>;
+const UsersIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>;
+const BellIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>;
+const SearchIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>;
+const ArrowUpIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>;
+const ArrowDownIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>;
+const InfoIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>;
+const CheckCircleIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-8.1"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>;
+const AlertCircleIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>;
+const CalendarIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>;
+const ClockIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>;
+const TruckIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>;
+const ShoppingBagIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>;
+const EditIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>;
+const BackIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>;
+const PlusIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>;
+const SettingsIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9A1.65 1.65 0 0 0 10 3v-.09a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>;
+const DollarSignIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>;
+const PercentIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="5" x2="5" y2="19"></line><circle cx="6.5" cy="6.5" r="2.5"></circle><circle cx="17.5" cy="17.5" r="2.5"></circle></svg>;
+
+// --- Helper Functions and Dummy Data Generation ---
+const generateId = () => Math.random().toString(36).substr(2, 9);
+const getRandomDate = () => {
+    const start = new Date(2023, 0, 1);
+    const end = new Date();
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+};
+
+const getRandomStatus = (role) => {
+    const statuses = {
+        Customer: ['Created', 'Accepted', 'Ironing', 'Ready', 'Delivered', 'Picked', 'Rejected'],
+        ServiceProvider: ['Accepted', 'Ironing', 'Ready', 'Delivered', 'Rejected'],
+        Admin: ['Created', 'Accepted', 'Ironing', 'Ready', 'Delivered', 'Picked', 'Rejected']
+    };
+    const roleStatuses = statuses[role] || statuses['Customer'];
+    return roleStatuses[Math.floor(Math.random() * roleStatuses.length)];
+};
+
+const getRandomDeliveryOption = () => Math.random() > 0.5 ? 'Doorstep' : 'Customer Pickup';
+
+const getStatusColorClass = (status) => {
+    switch (status) {
+        case 'Created': return 'status-created';
+        case 'Accepted':
+        case 'Ironing': return 'status-accepted';
+        case 'Ready': return 'status-ready';
+        case 'Delivered':
+        case 'Picked': return 'status-delivered';
+        case 'Rejected': return 'status-rejected';
+        default: return 'status-created';
+    }
+};
+
+const getStatusTagClass = (status) => {
+    switch (status) {
+        case 'Created': return 'status-tag-created';
+        case 'Accepted':
+        case 'Ironing': return 'status-tag-accepted';
+        case 'Ready': return 'status-tag-ready';
+        case 'Delivered':
+        case 'Picked': return 'status-tag-delivered';
+        case 'Rejected': return 'status-tag-rejected';
+        default: return 'status-tag-created';
+    }
+};
+
+const getStatusBadgeClass = (status) => {
+    switch (status) {
+        case 'Created': return 'status-badge-created';
+        case 'Accepted':
+        case 'Ironing': return 'status-badge-accepted';
+        case 'Ready': return 'status-badge-ready';
+        case 'Delivered':
+        case 'Picked': return 'status-badge-delivered';
+        case 'Rejected': return 'status-badge-rejected';
+        default: return 'status-badge-created';
+    }
+};
+
+const dummyCustomers = [
+    { id: 'cust1', name: 'Alice Smith', email: 'alice@example.com', address: '123 Pine St, City' },
+    { id: 'cust2', name: 'Bob Johnson', email: 'bob@example.com', address: '456 Oak Ave, Town' },
+    { id: 'cust3', name: 'Charlie Brown', email: 'charlie@example.com', address: '789 Elm Rd, Village' },
+    { id: 'cust4', name: 'Diana Prince', email: 'diana@example.com', address: '101 Hero Blvd, Metropolis' },
+    { id: 'cust5', name: 'Eve Adams', email: 'eve@example.com', address: '202 Spy Way, Gotham' },
+];
+
+const dummyServiceProviders = [
+    { id: 'sp1', name: 'CleanSteam Pro', email: 'sp1@example.com', contact: '555-1001', location: 'City Center', status: 'Active' },
+    { id: 'sp2', name: 'IronMasters LLC', email: 'sp2@example.com', contact: '555-1002', location: 'East Side', status: 'Active' },
+    { id: 'sp3', name: 'QuickPress', email: 'sp3@example.com', contact: '555-1003', location: 'West End', status: 'Active' },
+];
+
+const dummyClothTypes = [
+    { name: 'Shirts', pricePerKg: 5, unit: 'pcs' },
+    { name: 'Trousers', pricePerKg: 6, unit: 'pcs' },
+    { name: 'Dresses', pricePerKg: 8, unit: 'pcs' },
+    { name: 'Bed Linens', pricePerKg: 3, unit: 'kg' },
+    { name: 'Towels', pricePerKg: 2, unit: 'kg' },
+];
+
+const generateDummyOrder = (customer, serviceProvider, status, specificDeliveryOption = null) => {
+    const id = generateId();
+    const orderDate = getRandomDate();
+    const scheduledDate = new Date(orderDate);
+    scheduledDate.setDate(orderDate.getDate() + Math.floor(Math.random() * 3) + 1); // 1-3 days later
+
+    const items = Array.from({ length: Math.floor(Math.random() * 3) + 1 }, () => {
+        const cloth = dummyClothTypes[Math.floor(Math.random() * dummyClothTypes.length)];
+        const quantity = Math.floor(Math.random() * 5) + 1;
+        return {
+            type: cloth.name,
+            quantity: quantity,
+            unit: cloth.unit,
+            price: cloth.pricePerKg * quantity,
+        };
+    });
+
+    const totalAmount = items.reduce((sum, item) => sum + item.price, 0);
+    const deliveryOption = specificDeliveryOption || getRandomDeliveryOption();
+    const deliveryAddress = deliveryOption === 'Doorstep' ? customer.address : null;
+
+    const timeline = [{ status: 'Created', timestamp: orderDate.toISOString(), actor: customer.name }];
+    if (status !== 'Created') {
+        timeline.push({ status: 'Accepted', timestamp: new Date(orderDate.getTime() + 3600000).toISOString(), actor: serviceProvider.name }); // 1 hour later
+    }
+    if (status === 'Ironing' || status === 'Ready' || status === 'Delivered' || status === 'Picked') {
+        timeline.push({ status: 'Ironing', timestamp: new Date(orderDate.getTime() + 86400000).toISOString(), actor: serviceProvider.name }); // 1 day later
+    }
+    if (status === 'Ready' || status === 'Delivered' || status === 'Picked') {
+        timeline.push({ status: 'Ready', timestamp: new Date(orderDate.getTime() + 2 * 86400000).toISOString(), actor: serviceProvider.name }); // 2 days later
+    }
+    let completedDate = null;
+    if (status === 'Delivered' || status === 'Picked') {
+        completedDate = new Date(orderDate.getTime() + 3 * 86400000); // 3 days later
+        timeline.push({ status: status, timestamp: completedDate.toISOString(), actor: deliveryOption === 'Doorstep' ? 'Delivery Partner' : customer.name });
+    }
+
+    const slaStatus = Math.random() > 0.8 && status !== 'Delivered' && status !== 'Picked' ? 'Breached' : 'On Track';
+
+    return {
+        id,
+        customerId: customer.id,
+        customerName: customer.name,
+        serviceProviderId: serviceProvider.id,
+        serviceProviderName: serviceProvider.name,
+        orderDate: orderDate.toISOString(),
+        scheduledDate: scheduledDate.toISOString(),
+        completedDate: completedDate ? completedDate.toISOString() : null,
+        status,
+        items,
+        totalAmount,
+        deliveryOption,
+        deliveryAddress,
+        pickupAddress: deliveryOption === 'Customer Pickup' ? 'SP Location: ' + serviceProvider.location : null,
+        timeline,
+        slaStatus,
+        notes: "Handle with care, delicate fabrics."
+    };
+};
+
+const initialOrders = [];
+for (let i = 0; i < 20; i++) {
+    const customer = dummyCustomers[Math.floor(Math.random() * dummyCustomers.length)];
+    const serviceProvider = dummyServiceProviders[Math.floor(Math.random() * dummyServiceProviders.length)];
+    const status = getRandomStatus('Admin');
+    initialOrders.push(generateDummyOrder(customer, serviceProvider, status));
+}
+
+const initialActivities = [
+    { id: generateId(), role: 'Admin', type: 'New Order', description: 'New order #ORD001 placed by Alice Smith', timestamp: new Date(Date.now() - 3600000).toISOString(), orderId: initialOrders[0].id },
+    { id: generateId(), role: 'ServiceProvider', type: 'Order Accepted', description: 'Order #ORD002 accepted by CleanSteam Pro', timestamp: new Date(Date.now() - 7200000).toISOString(), orderId: initialOrders[1].id },
+    { id: generateId(), role: 'Customer', type: 'Order Ready', description: 'Your order #ORD003 is ready for pickup.', timestamp: new Date(Date.now() - 10800000).toISOString(), orderId: initialOrders[2].id },
+    { id: generateId(), role: 'Admin', type: 'Partner Setup', description: 'New Service Provider QuickPress added.', timestamp: new Date(Date.now() - 14400000).toISOString(), partnerId: dummyServiceProviders[2].id },
+    { id: generateId(), role: 'ServiceProvider', type: 'Delivery Completed', description: 'Order #ORD004 delivered to Bob Johnson.', timestamp: new Date(Date.now() - 18000000).toISOString(), orderId: initialOrders[3].id },
+    { id: generateId(), role: 'Customer', type: 'Delivery Scheduled', description: 'Delivery for order #ORD005 scheduled for tomorrow.', timestamp: new Date(Date.now() - 21600000).toISOString(), orderId: initialOrders[4].id },
+];
+
+const initialNotifications = [
+    { id: generateId(), userId: 'admin', message: 'New order #ORD001 placed.', type: 'info', read: false, timestamp: new Date(Date.now() - 300000).toISOString() },
+    { id: generateId(), userId: 'sp1', message: 'Order #ORD002 assigned to you.', type: 'action', read: false, timestamp: new Date(Date.now() - 600000).toISOString() },
+    { id: generateId(), userId: 'cust1', message: 'Your order #ORD003 is ready for pickup!', type: 'success', read: false, timestamp: new Date(Date.now() - 900000).toISOString() },
+    { id: generateId(), userId: 'admin', message: 'SLA Breach: Order #ORD006 is overdue.', type: 'error', read: false, timestamp: new Date(Date.now() - 1200000).toISOString() },
+];
+
+const initialPricing = [
+    { id: 'price1', clothType: 'Shirts', pricePerKg: 5, unit: 'pcs', lastUpdated: new Date().toISOString() },
+    { id: 'price2', clothType: 'Trousers', pricePerKg: 6, unit: 'pcs', lastUpdated: new Date().toISOString() },
+    { id: 'price3', clothType: 'Dresses', pricePerKg: 8, unit: 'pcs', lastUpdated: new Date().toISOString() },
+    { id: 'price4', clothType: 'Bed Linens', pricePerKg: 3, unit: 'kg', lastUpdated: new Date().toISOString() },
+    { id: 'price5', clothType: 'Towels', pricePerKg: 2, unit: 'kg', lastUpdated: new Date().toISOString() },
+];
+
+// --- Sub-Components ---
+
+const AuthScreen = ({ setCurrentUser }) => {
+    return (
+        <div className="auth-screen">
+            <div className="auth-card">
+                <h2>Welcome to IronEase</h2>
+                <p className="text-muted">Please select your role to continue</p>
+                <div className="auth-role-selection">
+                    <button className="role-button" onClick={() => setCurrentUser({ id: 'admin', name: 'Admin User', role: 'Admin' })}>Login as Admin</button>
+                    <button className="role-button" onClick={() => setCurrentUser({ id: 'cust1', name: 'Alice Smith', role: 'Customer' })}>Login as Customer</button>
+                    <button className="role-button" onClick={() => setCurrentUser({ id: 'sp1', name: 'CleanSteam Pro', role: 'ServiceProvider' })}>Login as Service Provider</button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const Header = ({ currentUser, navigate, notifications, onLogout, onSearch }) => {
+    const unreadCount = notifications.filter(n => !n.read && n.userId === currentUser.id).length;
+    return (
+        <header className="header">
+            <a href="#" className="header-brand" onClick={() => navigate('dashboard')}>IronEase</a>
+            <div className="global-search-container">
+                <SearchIcon className="global-search-icon" />
+                <input type="text" placeholder="Search orders, partners..." className="global-search-input" onChange={(e) => onSearch(e.target.value)} />
+            </div>
+            <nav className="header-nav">
+                <a href="#" onClick={() => navigate('dashboard')}><HomeIcon /> Dashboard</a>
+                {currentUser.role !== 'Admin' && <a href="#" onClick={() => navigate('ordersList')}><OrdersIcon /> My Orders</a>}
+                {currentUser.role === 'Admin' && <a href="#" onClick={() => navigate('ordersList')}><OrdersIcon /> All Orders</a>}
+                {currentUser.role === 'Admin' && <a href="#" onClick={() => navigate('partnersList')}><UsersIcon /> Partners</a>}
+                {currentUser.role === 'Admin' && <a href="#" onClick={() => navigate('rateSetupForm')}><DollarSignIcon /> Pricing</a>}
+                <div className="header-notification-icon">
+                    <BellIcon />
+                    {unreadCount > 0 && <span className="badge">{unreadCount}</span>}
+                </div>
+            </nav>
+            <div className="header-user">
+                <span className="user-avatar">{currentUser.name.charAt(0)}</span>
+                <span>{currentUser.name} ({currentUser.role})</span>
+                <button className="btn btn-secondary" onClick={onLogout}>Logout</button>
+            </div>
+        </header>
+    );
+};
+
+const ToastNotification = ({ message, type, onClose }) => {
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            onClose();
+        }, 4000); // Auto-close after 4 seconds
+        return () => clearTimeout(timer);
+    }, [onClose]);
+
+    let Icon;
+    let toastClass;
+    switch (type) {
+        case 'info': Icon = InfoIcon; toastClass = 'toast-info'; break;
+        case 'success': Icon = CheckCircleIcon; toastClass = 'toast-success'; break;
+        case 'action': Icon = AlertCircleIcon; toastClass = 'toast-action'; break;
+        case 'error': Icon = AlertCircleIcon; toastClass = 'toast-error'; break;
+        default: Icon = InfoIcon; toastClass = 'toast-info'; break;
+    }
+
+    return (
+        <div className={`toast-notification ${toastClass}`}>
+            <Icon className="toast-icon" />
+            <span>{message}</span>
+        </div>
+    );
+};
+
+const Card = ({ title, content, status, onClick, children, className = '' }) => {
+    const statusClass = getStatusColorClass(status);
+    return (
+        <div className={`card ${statusClass} ${className}`} onClick={onClick} tabIndex="0">
+            <div className="card-header">{title}</div>
+            <div className="card-body">
+                {children || content}
+            </div>
+            <div className="card-footer">Status: <span className={getStatusTagClass(status)}>{status}</span></div>
+        </div>
+    );
+};
+
+const KPICard = ({ title, value, trend = 0, unit = '', onClick }) => {
+    const trendClass = trend > 0 ? 'positive' : trend < 0 ? 'negative' : '';
+    const TrendIcon = trend > 0 ? ArrowUpIcon : ArrowDownIcon;
+    return (
+        <div className="kpi-card card" onClick={onClick}>
+            <div className="kpi-card-title">{title}</div>
+            <div className="kpi-card-value">{value}{unit}</div>
+            {trend !== 0 && (
+                <div className={`kpi-card-footer ${trendClass}`}>
+                    <TrendIcon /> {Math.abs(trend)}% vs last period
+                </div>
+            )}
+        </div>
+    );
+};
+
+const ChartPlaceholder = ({ title, type, data, options }) => {
+    // In a real app, this would integrate a charting library like Chart.js or Recharts
+    // For this prototype, it's a styled placeholder to demonstrate the concept.
+    return (
+        <div className="chart-container">
+            <h3>{title} ({type} Chart)</h3>
+            <p className="text-muted">Data visualization goes here. Example: {JSON.stringify(data.slice(0,2))}...</p>
+        </div>
+    );
+};
+
+const RecentActivities = ({ activities, currentUser, navigate }) => {
+    const filteredActivities = activities.filter(activity =>
+        currentUser.role === 'Admin' || activity.role === currentUser.role
+    ).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)).slice(0, 5);
+
+    if (filteredActivities.length === 0) {
+        return <div className="dashboard-section"><h4>Recent Activities</h4><p className="text-muted">No recent activities.</p></div>;
+    }
+
+    return (
+        <div className="dashboard-section">
+            <h4>Recent Activities</h4>
+            <ul className="activity-feed">
+                {filteredActivities.map(activity => (
+                    <li key={activity.id} className="activity-item" onClick={() => activity.orderId && navigate('orderDetail', activity.orderId)}>
+                        <span className="activity-icon"><InfoIcon /></span>
+                        <div className="activity-details">
+                            <p>{activity.description} <span className={getStatusTagClass(activity.type.split(' ')[0])}>{activity.type}</span></p>
+                            <span className="activity-timestamp">{new Date(activity.timestamp).toLocaleString()}</span>
+                        </div>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+};
+
+const TaskQueue = ({ orders, currentUser, navigate, onUpdateOrderStatus }) => {
+    if (currentUser.role !== 'ServiceProvider') return null;
+
+    const kanbanColumns = {
+        'Accepted': { title: 'Accepted', color: 'var(--status-blue)' },
+        'Ironing': { title: 'In Progress', color: 'var(--status-blue)' },
+        'Ready': { title: 'Ready', color: 'var(--status-orange)' },
+    };
+
+    const spOrders = orders.filter(o => o.serviceProviderId === currentUser.id && Object.keys(kanbanColumns).includes(o.status));
+
+    const handleDragStart = (e, orderId) => {
+        e.dataTransfer.setData("orderId", orderId);
+    };
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+    };
+
+    const handleDrop = (e, newStatus) => {
+        e.preventDefault();
+        const orderId = e.dataTransfer.getData("orderId");
+        const order = spOrders.find(o => o.id === orderId);
+        if (order && order.status !== newStatus) {
+            onUpdateOrderStatus(orderId, newStatus);
+        }
+    };
+
+    return (
+        <div className="dashboard-section">
+            <h4>My Task Queue</h4>
+            <div className="kanban-board">
+                {Object.entries(kanbanColumns).map(([statusKey, columnInfo]) => (
+                    <div
+                        key={statusKey}
+                        className="kanban-column"
+                        onDragOver={handleDragOver}
+                        onDrop={(e) => handleDrop(e, statusKey)}
+                    >
+                        <h4 style={{ color: columnInfo.color }}>{columnInfo.title} ({spOrders.filter(o => o.status === statusKey).length})</h4>
+                        {spOrders.filter(o => o.status === statusKey).map(order => (
+                            <div
+                                key={order.id}
+                                className={`task-card ${getStatusColorClass(order.status)}`}
+                                draggable
+                                onDragStart={(e) => handleDragStart(e, order.id)}
+                                onClick={() => navigate('orderDetail', order.id)}
+                            >
+                                <h5>Order #{order.id.substring(0, 6).toUpperCase()}</h5>
+                                <p>Customer: {order.customerName}</p>
+                                <p>Items: {order.items.length}</p>
+                                <div className="task-card-footer">
+                                    <span><CalendarIcon /> {new Date(order.scheduledDate).toLocaleDateString()}</span>
+                                    <span>{order.deliveryOption === 'Doorstep' ? <TruckIcon /> : <ShoppingBagIcon />} {order.deliveryOption}</span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+const AdminDashboard = ({ orders, partners, navigate }) => {
+    const totalOrders = orders.length;
+    const revenue = orders.filter(o => o.status === 'Delivered' || o.status === 'Picked').reduce((sum, o) => sum + o.totalAmount, 0);
+    const avgTurnaroundTime = orders.filter(o => o.completedDate && o.orderDate)
+        .map(o => (new Date(o.completedDate) - new Date(o.orderDate)) / (1000 * 60 * 60 * 24)) // days
+        .reduce((sum, days, i, arr) => sum + days / arr.length, 0);
+    const deliveryCount = orders.filter(o => o.deliveryOption === 'Doorstep').length;
+    const pickupCount = orders.filter(o => o.deliveryOption === 'Customer Pickup').length;
+
+    const ordersByStatusData = orders.reduce((acc, order) => {
+        acc[order.status] = (acc[order.status] || 0) + 1;
+        return acc;
+    }, {});
+
+    const deliveryVsPickupData = { 'Doorstep': deliveryCount, 'Pickup': pickupCount };
+
+    return (
+        <div>
+            <h2>Admin Dashboard</h2>
+            <div className="dashboard-grid">
+                <KPICard title="Total Orders" value={totalOrders} trend={7} onClick={() => navigate('ordersList')} />
+                <KPICard title="Total Revenue" value={`$${revenue.toFixed(2)}`} trend={12} unit="" onClick={() => navigate('ordersList', { status: 'Delivered' })} />
+                <KPICard title="Avg. TAT" value={`${avgTurnaroundTime.toFixed(1)}`} unit=" days" trend={-3} />
+                <KPICard title="Delivery vs Pickup" value={`${deliveryCount} / ${pickupCount}`} unit="" onClick={() => navigate('ordersList', { deliveryOption: 'Doorstep' })} />
+            </div>
+            <div className="dashboard-grid">
+                <ChartPlaceholder title="Revenue Trend" type="Line" data={[]} options={[]} />
+                <ChartPlaceholder title="TAT Gauge" type="Gauge" data={[]} options={[]} />
+                <ChartPlaceholder title="Delivery vs Pickup" type="Donut" data={deliveryVsPickupData} options={[]} />
+            </div>
+        </div>
+    );
+};
+
+const CustomerDashboard = ({ orders, navigate }) => {
+    const myOrders = orders.filter(o => o.customerId === 'cust1'); // Assuming cust1 is the logged-in customer for dummy data
+    const ordersPlaced = myOrders.length;
+    const ordersReady = myOrders.filter(o => o.status === 'Ready' || o.status === 'Picked').length;
+
+    const orderStatusData = myOrders.reduce((acc, order) => {
+        acc[order.status] = (acc[order.status] || 0) + 1;
+        return acc;
+    }, {});
+
+    return (
+        <div>
+            <h2>My Dashboard</h2>
+            <div className="dashboard-grid">
+                <KPICard title="Orders Placed" value={ordersPlaced} onClick={() => navigate('ordersList')} />
+                <KPICard title="Orders Ready" value={ordersReady} onClick={() => navigate('ordersList', { status: 'Ready' })} />
+            </div>
+            <div className="dashboard-grid">
+                <ChartPlaceholder title="Order Status Distribution" type="Donut" data={orderStatusData} options={[]} />
+            </div>
+            <div className="dashboard-section">
+                <h4>My Recent Orders</h4>
+                <div className="card-grid">
+                    {myOrders.slice(0, 4).map(order => (
+                        <Card
+                            key={order.id}
+                            title={`Order #${order.id.substring(0, 6).toUpperCase()}`}
+                            status={order.status}
+                            onClick={() => navigate('orderDetail', order.id)}
+                        >
+                            <p><strong>Total:</strong> ${order.totalAmount.toFixed(2)}</p>
+                            <p><strong>Scheduled:</strong> {new Date(order.scheduledDate).toLocaleDateString()}</p>
+                        </Card>
+                    ))}
+                </div>
+                {myOrders.length > 4 && (
+                    <div className="mt-md" style={{ textAlign: 'right' }}>
+                        <button className="btn btn-secondary" onClick={() => navigate('ordersList')}>View All Orders</button>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+};
+
+const ServiceProviderDashboard = ({ orders, navigate, onUpdateOrderStatus }) => {
+    const myOrders = orders.filter(o => o.serviceProviderId === 'sp1'); // Assuming sp1 is the logged-in SP
+    const ordersReceived = myOrders.length;
+    const ordersInProgress = myOrders.filter(o => o.status === 'Accepted' || o.status === 'Ironing').length;
+    const ordersCompleted = myOrders.filter(o => o.status === 'Delivered' || o.status === 'Picked').length;
+    const deliveriesScheduled = myOrders.filter(o => o.status === 'Ready' && o.deliveryOption === 'Doorstep').length;
+
+    const ordersByStatusData = myOrders.reduce((acc, order) => {
+        acc[order.status] = (acc[order.status] || 0) + 1;
+        return acc;
+    }, {});
+
+    const deliveryVsPickupData = myOrders.reduce((acc, order) => {
+        acc[order.deliveryOption] = (acc[order.deliveryOption] || 0) + 1;
+        return acc;
+    }, {});
+
+    return (
+        <div>
+            <h2>Service Provider Dashboard</h2>
+            <div className="dashboard-grid">
+                <KPICard title="Orders Received" value={ordersReceived} onClick={() => navigate('ordersList', { spId: 'sp1' })} />
+                <KPICard title="Orders In Progress" value={ordersInProgress} onClick={() => navigate('ordersList', { spId: 'sp1', status: 'In Progress' })} />
+                <KPICard title="Orders Completed" value={ordersCompleted} onClick={() => navigate('ordersList', { spId: 'sp1', status: 'Completed' })} />
+                <KPICard title="Deliveries Scheduled" value={deliveriesScheduled} onClick={() => navigate('ordersList', { spId: 'sp1', status: 'Ready', deliveryOption: 'Doorstep' })} />
+            </div>
+            <div className="dashboard-grid">
+                <ChartPlaceholder title="Orders by Status" type="Bar" data={ordersByStatusData} options={[]} />
+                <ChartPlaceholder title="Daily Volume Trend" type="Line" data={[]} options={[]} />
+                <ChartPlaceholder title="Delivery vs Pickup" type="Donut" data={deliveryVsPickupData} options={[]} />
+            </div>
+            <TaskQueue orders={orders} currentUser={{ id: 'sp1', role: 'ServiceProvider' }} navigate={navigate} onUpdateOrderStatus={onUpdateOrderStatus} />
+        </div>
+    );
+};
+
+const OrdersList = ({ orders, currentUser, navigate, filters, setFilters }) => {
+    const [searchTerm, setSearchTerm] = useState('');
+    const [currentFilters, setCurrentFilters] = useState(filters || { status: 'All', deliveryOption: 'All', dateRange: '' });
+
+    useEffect(() => {
+        setCurrentFilters(filters || { status: 'All', deliveryOption: 'All', dateRange: '' });
+    }, [filters]);
+
+    const handleFilterChange = (e) => {
+        setCurrentFilters({ ...currentFilters, [e.target.name]: e.target.value });
+        setFilters({ ...currentFilters, [e.target.name]: e.target.value }); // Propagate up
+    };
+
+    const applyFilters = (order) => {
+        const matchesSearch = order.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                              order.customerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                              order.serviceProviderName.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesStatus = currentFilters.status === 'All' || order.status === currentFilters.status ||
+                              (currentFilters.status === 'In Progress' && (order.status === 'Accepted' || order.status === 'Ironing')) ||
+                              (currentFilters.status === 'Completed' && (order.status === 'Delivered' || order.status === 'Picked'));
+        const matchesDelivery = currentFilters.deliveryOption === 'All' || order.deliveryOption === currentFilters.deliveryOption;
+        // Basic date range filter, could be expanded
+        const matchesDate = currentFilters.dateRange === '' || (new Date(order.orderDate) >= new Date(currentFilters.dateRange));
+
+        return matchesSearch && matchesStatus && matchesDelivery && matchesDate;
+    };
+
+    let filteredOrders = orders;
+    if (currentUser.role === 'Customer') {
+        filteredOrders = filteredOrders.filter(order => order.customerId === currentUser.id);
+    } else if (currentUser.role === 'ServiceProvider') {
+        filteredOrders = filteredOrders.filter(order => order.serviceProviderId === currentUser.id);
+    }
+    filteredOrders = filteredOrders.filter(applyFilters);
+
+    if (filteredOrders.length === 0 && (searchTerm || currentFilters.status !== 'All' || currentFilters.deliveryOption !== 'All' || currentFilters.dateRange !== '')) {
+        return (
+            <div className="full-screen-view">
+                <div className="full-screen-header">
+                    <button className="back-button" onClick={() => navigate('dashboard')}><BackIcon /> Back to Dashboard</button>
+                    <h2>My Orders</h2>
+                </div>
+                <div className="filters-section">
+                    <input
+                        type="text"
+                        placeholder="Search orders..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="input-field"
+                        style={{ paddingLeft: '16px' }}
+                    />
+                    <div className="filter-group">
+                        <label>Status</label>
+                        <select name="status" value={currentFilters.status} onChange={handleFilterChange}>
+                            <option value="All">All</option>
+                            <option value="Created">Created</option>
+                            <option value="Accepted">Accepted</option>
+                            <option value="Ironing">Ironing</option>
+                            <option value="Ready">Ready</option>
+                            <option value="Delivered">Delivered</option>
+                            <option value="Picked">Picked</option>
+                            <option value="Rejected">Rejected</option>
+                            {currentUser.role !== 'Customer' && <option value="In Progress">In Progress</option>}
+                            {currentUser.role !== 'Customer' && <option value="Completed">Completed</option>}
+                        </select>
+                    </div>
+                    <div className="filter-group">
+                        <label>Delivery Option</label>
+                        <select name="deliveryOption" value={currentFilters.deliveryOption} onChange={handleFilterChange}>
+                            <option value="All">All</option>
+                            <option value="Doorstep">Doorstep</option>
+                            <option value="Customer Pickup">Customer Pickup</option>
+                        </select>
+                    </div>
+                    <div className="filter-group">
+                        <label>Order Date From</label>
+                        <input type="date" name="dateRange" value={currentFilters.dateRange} onChange={handleFilterChange} />
+                    </div>
+                </div>
+                <div className="dashboard-section" style={{ textAlign: 'center' }}>
+                    <h3>No Orders Found</h3>
+                    <p className="text-muted">Adjust your filters or try a different search term.</p>
+                    {currentUser.role === 'Customer' && (
+                        <button className="btn btn-primary mt-md" onClick={() => navigate('orderForm')}>Place New Order</button>
+                    )}
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="full-screen-view">
+            <div className="full-screen-header">
+                <button className="back-button" onClick={() => navigate('dashboard')}><BackIcon /> Back to Dashboard</button>
+                <h2>{currentUser.role === 'Customer' ? 'My Orders' : 'All Orders'} ({filteredOrders.length})</h2>
+                {currentUser.role === 'Customer' && (
+                    <button className="btn btn-primary" onClick={() => navigate('orderForm')}><PlusIcon /> Place New Order</button>
+                )}
+            </div>
+            <div className="filters-section">
+                <input
+                    type="text"
+                    placeholder="Search orders..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="input-field"
+                    style={{ paddingLeft: '16px', marginBottom: 'var(--spacing-md)' }}
+                />
+                <div className="filter-group">
+                    <label>Status</label>
+                    <select name="status" value={currentFilters.status} onChange={handleFilterChange}>
+                        <option value="All">All</option>
+                        <option value="Created">Created</option>
+                        <option value="Accepted">Accepted</option>
+                        <option value="Ironing">Ironing</option>
+                        <option value="Ready">Ready</option>
+                        <option value="Delivered">Delivered</option>
+                        <option value="Picked">Picked</option>
+                        <option value="Rejected">Rejected</option>
+                        {currentUser.role !== 'Customer' && <option value="In Progress">In Progress</option>}
+                        {currentUser.role !== 'Customer' && <option value="Completed">Completed</option>}
+                    </select>
+                </div>
+                <div className="filter-group">
+                    <label>Delivery Option</label>
+                    <select name="deliveryOption" value={currentFilters.deliveryOption} onChange={handleFilterChange}>
+                        <option value="All">All</option>
+                        <option value="Doorstep">Doorstep</option>
+                        <option value="Customer Pickup">Customer Pickup</option>
+                    </select>
+                </div>
+                <div className="filter-group">
+                    <label>Order Date From</label>
+                    <input type="date" name="dateRange" value={currentFilters.dateRange} onChange={handleFilterChange} />
+                </div>
+            </div>
+            <div className="card-grid">
+                {filteredOrders.map(order => (
+                    <Card
+                        key={order.id}
+                        title={`Order #${order.id.substring(0, 6).toUpperCase()}`}
+                        status={order.status}
+                        onClick={() => navigate('orderDetail', order.id)}
+                    >
+                        <p><strong>Customer:</strong> {order.customerName}</p>
+                        <p><strong>SP:</strong> {order.serviceProviderName}</p>
+                        <p><strong>Total:</strong> ${order.totalAmount.toFixed(2)}</p>
+                        <p><strong>Scheduled:</strong> {new Date(order.scheduledDate).toLocaleDateString()}</p>
+                        <span className="delivery-badge">{order.deliveryOption === 'Doorstep' ? <TruckIcon /> : <ShoppingBagIcon />} {order.deliveryOption}</span>
+                    </Card>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+const PartnersList = ({ partners, currentUser, navigate }) => {
+    if (currentUser.role !== 'Admin') return null;
+
+    const [searchTerm, setSearchTerm] = useState('');
+    const filteredPartners = partners.filter(p =>
+        p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        p.location.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    return (
+        <div className="full-screen-view">
+            <div className="full-screen-header">
+                <button className="back-button" onClick={() => navigate('dashboard')}><BackIcon /> Back to Dashboard</button>
+                <h2>Service Partners ({filteredPartners.length})</h2>
+                <button className="btn btn-primary" onClick={() => navigate('partnerForm')}><PlusIcon /> Add New Partner</button>
+            </div>
+            <div className="filters-section">
+                <input
+                    type="text"
+                    placeholder="Search partners..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="input-field"
+                    style={{ paddingLeft: '16px' }}
+                />
+            </div>
+            <div className="card-grid">
+                {filteredPartners.map(partner => (
+                    <Card
+                        key={partner.id}
+                        title={partner.name}
+                        status={partner.status === 'Active' ? 'Accepted' : 'Created'} // Map for card color
+                        onClick={() => navigate('partnerDetail', partner.id)}
+                    >
+                        <p><strong>Contact:</strong> {partner.contact}</p>
+                        <p><strong>Location:</strong> {partner.location}</p>
+                        <p><strong>Status:</strong> <span className={getStatusTagClass(partner.status === 'Active' ? 'Approved' : 'Pending')}>{partner.status}</span></p>
+                    </Card>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+const WorkflowTracker = ({ currentStatus, timeline, slaStatus }) => {
+    const milestones = ['Created', 'Accepted', 'Ironing', 'Ready', 'Delivered/Picked'];
+    const statusMap = {
+        'Created': 'Created',
+        'Accepted': 'Accepted',
+        'Ironing': 'Ironing',
+        'Ready': 'Ready',
+        'Delivered': 'Delivered/Picked',
+        'Picked': 'Delivered/Picked',
+        'Rejected': 'Rejected', // Will be treated as a terminal state
+    };
+
+    const currentMilestoneIndex = milestones.indexOf(statusMap[currentStatus]);
+    const progressWidth = currentMilestoneIndex >= 0 ? (currentMilestoneIndex / (milestones.length - 1)) * 100 : 0;
+
+    return (
+        <div className="workflow-stepper">
+            <div className="stepper-line">
+                <div className="stepper-line-progress" style={{ width: `${progressWidth}%` }}></div>
+            </div>
+            {milestones.map((milestone, index) => {
+                const isCompleted = index <= currentMilestoneIndex;
+                const isCurrent = index === currentMilestoneIndex && currentStatus !== 'Rejected';
+                const isSlaBreached = isCurrent && slaStatus === 'Breached';
+                return (
+                    <div
+                        key={milestone}
+                        className={`stepper-item ${isCompleted ? 'completed' : ''} ${isCurrent ? 'current' : ''} ${isSlaBreached ? 'sla-breached' : ''}`}
+                    >
+                        <div className="stepper-icon">
+                            {isSlaBreached ? <AlertCircleIcon /> : isCompleted ? <CheckCircleIcon /> : index + 1}
+                        </div>
+                        <div className="stepper-label">{milestone.split('/')[0]}</div> {/* Show only first part for brevity */}
+                        {isCurrent && (slaStatus === 'Breached' ? <span className="text-muted" style={{color: 'var(--status-red)'}}>SLA Breached</span> : <span className="text-muted">In Progress</span>)}
+                        {timeline.find(t => t.status === milestone.split('/')[0]) && <span className="text-muted">{new Date(timeline.find(t => t.status === milestone.split('/')[0]).timestamp).toLocaleDateString()}</span>}
+                    </div>
+                );
+            })}
+        </div>
+    );
+};
+
+const OrderDetail = ({ order, currentUser, navigate, onUpdateOrder }) => {
+    if (!order) return <p>Order not found.</p>;
+
+    const isCustomer = currentUser.role === 'Customer';
+    const isServiceProvider = currentUser.role === 'ServiceProvider';
+    const isAdmin = currentUser.role === 'Admin';
+
+    const canAccept = isServiceProvider && order.status === 'Created';
+    const canMarkIroning = isServiceProvider && order.status === 'Accepted';
+    const canMarkReady = isServiceProvider && order.status === 'Ironing';
+    const canMarkDelivered = isServiceProvider && order.status === 'Ready' && order.deliveryOption === 'Doorstep';
+    const canMarkPicked = isServiceProvider && order.status === 'Ready' && order.deliveryOption === 'Customer Pickup';
+    const canEdit = isAdmin; // Or specific conditions for SP/Customer
+
+    const handleAction = (newStatus) => {
+        const timestamp = new Date().toISOString();
+        const updatedOrder = {
+            ...order,
+            status: newStatus,
+            timeline: [...order.timeline, { status: newStatus, timestamp, actor: currentUser.name }],
+            completedDate: (newStatus === 'Delivered' || newStatus === 'Picked') ? timestamp : order.completedDate,
+        };
+        onUpdateOrder(updatedOrder);
+        navigate('ordersList');
+    };
+
+    return (
+        <div className="full-screen-view">
+            <div className="full-screen-header">
+                <button className="back-button" onClick={() => navigate('ordersList')}><BackIcon /> Back to Orders</button>
+                <h2>Order Details: #{order.id.substring(0, 6).toUpperCase()}</h2>
+                {canEdit && (
+                    <button className="btn btn-secondary" onClick={() => navigate('orderForm', order.id)}>
+                        <EditIcon /> Edit Order
+                    </button>
+                )}
+            </div>
+            <div className="detail-view-content">
+                <div className="hero-section">
+                    <div className="hero-info">
+                        <h3>Order for {order.customerName}</h3>
+                        <p>Placed on {new Date(order.orderDate).toLocaleDateString()}</p>
+                        <span className={getStatusBadgeClass(order.status)}>{order.status}</span>
+                        {order.deliveryOption && <span className="delivery-badge">{order.deliveryOption === 'Doorstep' ? <TruckIcon /> : <ShoppingBagIcon />} {order.deliveryOption}</span>}
+                    </div>
+                    <div>
+                        <p><strong>Total Amount:</strong> <span style={{ fontSize: '1.5em', fontWeight: 'bold', color: 'var(--primary-color)' }}>${order.totalAmount.toFixed(2)}</span></p>
+                    </div>
+                </div>
+
+                <WorkflowTracker
+                    currentStatus={order.status}
+                    timeline={order.timeline}
+                    slaStatus={order.slaStatus}
+                />
+
+                <div className="detail-sections">
+                    <div className="detail-section-card">
+                        <h4>Order Information</h4>
+                        <div className="detail-item">
+                            <span className="detail-item-label">Customer:</span>
+                            <span className="detail-item-value">{order.customerName}</span>
+                        </div>
+                        <div className="detail-item">
+                            <span className="detail-item-label">Service Provider:</span>
+                            <span className="detail-item-value">{order.serviceProviderName}</span>
+                        </div>
+                        <div className="detail-item">
+                            <span className="detail-item-label">Scheduled Date:</span>
+                            <span className="detail-item-value">{new Date(order.scheduledDate).toLocaleDateString()}</span>
+                        </div>
+                        {order.completedDate && (
+                            <div className="detail-item">
+                                <span className="detail-item-label">Completion Date:</span>
+                                <span className="detail-item-value">{new Date(order.completedDate).toLocaleDateString()}</span>
+                            </div>
+                        )}
+                        <div className="detail-item">
+                            <span className="detail-item-label">Delivery Option:</span>
+                            <span className="detail-item-value">{order.deliveryOption}</span>
+                        </div>
+                        {order.deliveryAddress && (
+                            <div className="detail-item">
+                                <span className="detail-item-label">Delivery Address:</span>
+                                <span className="detail-item-value">{order.deliveryAddress}</span>
+                            </div>
+                        )}
+                        {order.pickupAddress && (
+                            <div className="detail-item">
+                                <span className="detail-item-label">Pickup Location:</span>
+                                <span className="detail-item-value">{order.pickupAddress}</span>
+                            </div>
+                        )}
+                        <div className="detail-item">
+                            <span className="detail-item-label">Notes:</span>
+                            <span className="detail-item-value">{order.notes}</span>
+                        </div>
+                    </div>
+
+                    <div className="detail-section-card">
+                        <h4>Items</h4>
+                        <ul className="items-list">
+                            {order.items.map((item, index) => (
+                                <li key={index}>
+                                    <span>{item.type} ({item.quantity} {item.unit})</span>
+                                    <span>${item.price.toFixed(2)}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    <div className="detail-section-card">
+                        <h4>Audit Trail / Timeline</h4>
+                        <ul className="activity-feed">
+                            {order.timeline.map((event, index) => (
+                                <li key={index} className="activity-item">
+                                    <span className="activity-icon"><ClockIcon /></span>
+                                    <div className="activity-details">
+                                        <p><strong>{event.status}</strong> by {event.actor}</p>
+                                        <span className="activity-timestamp">{new Date(event.timestamp).toLocaleString()}</span>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {(canAccept || canMarkIroning || canMarkReady || canMarkDelivered || canMarkPicked) && (
+                <div className="sticky-actions">
+                    {canAccept && <button className="btn btn-action" onClick={() => handleAction('Accepted')}>Accept Order</button>}
+                    {canMarkIroning && <button className="btn btn-action" onClick={() => handleAction('Ironing')}>Mark In Ironing</button>}
+                    {canMarkReady && <button className="btn btn-action" onClick={() => handleAction('Ready')}>Mark Ready</button>}
+                    {canMarkDelivered && <button className="btn btn-action" onClick={() => handleAction('Delivered')}>Mark Delivered</button>}
+                    {canMarkPicked && <button className="btn btn-action" onClick={() => handleAction('Picked')}>Mark Picked Up</button>}
+                </div>
+            )}
+        </div>
+    );
+};
+
+const PartnerDetail = ({ partner, currentUser, navigate, onUpdatePartner }) => {
+    if (!partner || currentUser.role !== 'Admin') return null;
+
+    const handleEdit = () => {
+        navigate('partnerForm', partner.id);
+    };
+
+    return (
+        <div className="full-screen-view">
+            <div className="full-screen-header">
+                <button className="back-button" onClick={() => navigate('partnersList')}><BackIcon /> Back to Partners</button>
+                <h2>Partner Details: {partner.name}</h2>
+                <button className="btn btn-secondary" onClick={handleEdit}><EditIcon /> Edit Partner</button>
+            </div>
+            <div className="detail-view-content">
+                <div className="hero-section">
+                    <div className="hero-info">
+                        <h3>{partner.name}</h3>
+                        <p>Status: <span className={getStatusBadgeClass(partner.status === 'Active' ? 'Approved' : 'Pending')}>{partner.status}</span></p>
+                    </div>
+                </div>
+
+                <div className="detail-sections">
+                    <div className="detail-section-card">
+                        <h4>Contact Information</h4>
+                        <div className="detail-item"><span className="detail-item-label">Email:</span> <span className="detail-item-value">{partner.email}</span></div>
+                        <div className="detail-item"><span className="detail-item-label">Contact:</span> <span className="detail-item-value">{partner.contact}</span></div>
+                        <div className="detail-item"><span className="detail-item-label">Location:</span> <span className="detail-item-value">{partner.location}</span></div>
+                    </div>
+                    {/* Related records could be shown here, e.g., orders handled by this partner */}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const OrderForm = ({ currentUser, navigate, orderToEdit, onSaveOrder, showToast, pricing }) => {
+    const isEditMode = !!orderToEdit;
+    const initialItems = isEditMode ? orderToEdit.items : [{ type: '', quantity: 0, price: 0, unit: '' }];
+    const [currentStep, setCurrentStep] = useState(1);
+    const [formData, setFormData] = useState({
+        customerId: isEditMode ? orderToEdit.customerId : currentUser.id,
+        customerName: isEditMode ? orderToEdit.customerName : currentUser.name,
+        serviceProviderId: isEditMode ? orderToEdit.serviceProviderId : '',
+        serviceProviderName: isEditMode ? orderToEdit.serviceProviderName : '',
+        scheduledDate: isEditMode ? new Date(orderToEdit.scheduledDate).toISOString().split('T')[0] : '',
+        deliveryOption: isEditMode ? orderToEdit.deliveryOption : 'Doorstep',
+        deliveryAddress: isEditMode ? orderToEdit.deliveryAddress : (currentUser.role === 'Customer' ? dummyCustomers.find(c => c.id === currentUser.id)?.address : ''),
+        pickupAddress: isEditMode ? orderToEdit.pickupAddress : '',
+        notes: isEditMode ? orderToEdit.notes : '',
+        items: initialItems,
+    });
+    const [errors, setErrors] = useState({});
+    const [formSubmitted, setFormSubmitted] = useState(false);
+
+    const availableClothTypes = dummyClothTypes.map(ct => ct.name);
+
+    const validateStep = () => {
+        let newErrors = {};
+        if (currentStep === 1) {
+            if (!formData.scheduledDate) newErrors.scheduledDate = 'Scheduled date is required.';
+            if (!formData.deliveryOption) newErrors.deliveryOption = 'Delivery option is required.';
+            if (formData.deliveryOption === 'Doorstep' && !formData.deliveryAddress) newErrors.deliveryAddress = 'Delivery address is required.';
+            if (formData.deliveryOption === 'Customer Pickup' && !formData.pickupAddress) newErrors.pickupAddress = 'Pickup address is required.';
+        } else if (currentStep === 2) {
+            const hasValidItems = formData.items.every(item => item.type && item.quantity > 0);
+            if (!hasValidItems) newErrors.items = 'All items must have a type and quantity.';
+        }
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleItemChange = (index, e) => {
+        const { name, value } = e.target;
+        const newItems = formData.items.map((item, i) => {
+            if (i === index) {
+                let updatedItem = { ...item, [name]: value };
+                if (name === 'type' || name === 'quantity') {
+                    const clothType = dummyClothTypes.find(ct => ct.name === updatedItem.type);
+                    if (clothType && updatedItem.quantity > 0) {
+                        updatedItem.price = clothType.pricePerKg * updatedItem.quantity;
+                        updatedItem.unit = clothType.unit;
+                    } else {
+                        updatedItem.price = 0;
+                    }
+                }
+                return updatedItem;
+            }
+            return item;
+        });
+        setFormData(prev => ({ ...prev, items: newItems }));
+    };
+
+    const addItem = () => {
+        setFormData(prev => ({
+            ...prev,
+            items: [...prev.items, { type: '', quantity: 0, price: 0, unit: '' }]
+        }));
+    };
+
+    const removeItem = (index) => {
+        setFormData(prev => ({
+            ...prev,
+            items: prev.items.filter((_, i) => i !== index)
+        }));
+    };
+
+    const nextStep = () => {
+        if (validateStep()) {
+            setCurrentStep(prev => prev + 1);
+        } else {
+            showToast({ message: 'Please correct the errors before proceeding.', type: 'error' });
+        }
+    };
+
+    const prevStep = () => setCurrentStep(prev => prev - 1);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (validateStep()) {
+            const totalAmount = formData.items.reduce((sum, item) => sum + item.price, 0);
+            const selectedSP = dummyServiceProviders[Math.floor(Math.random() * dummyServiceProviders.length)]; // Auto-assign a random SP for prototype
+            const newOrder = {
+                ...orderToEdit,
+                id: orderToEdit ? orderToEdit.id : generateId(),
+                customerId: formData.customerId,
+                customerName: formData.customerName,
+                serviceProviderId: formData.serviceProviderId || selectedSP.id,
+                serviceProviderName: formData.serviceProviderName || selectedSP.name,
+                orderDate: isEditMode ? orderToEdit.orderDate : new Date().toISOString(),
+                scheduledDate: new Date(formData.scheduledDate).toISOString(),
+                status: isEditMode ? orderToEdit.status : 'Created',
+                items: formData.items,
+                totalAmount: totalAmount,
+                deliveryOption: formData.deliveryOption,
+                deliveryAddress: formData.deliveryOption === 'Doorstep' ? formData.deliveryAddress : null,
+                pickupAddress: formData.deliveryOption === 'Customer Pickup' ? formData.pickupAddress : null,
+                notes: formData.notes,
+                timeline: isEditMode ? orderToEdit.timeline : [{ status: 'Created', timestamp: new Date().toISOString(), actor: currentUser.name }],
+                slaStatus: 'On Track',
+            };
+            onSaveOrder(newOrder, isEditMode);
+            setFormSubmitted(true);
+            showToast({ message: isEditMode ? 'Order updated successfully!' : 'Order placed successfully!', type: 'success' });
+            setTimeout(() => navigate('ordersList'), 2000);
+        } else {
+            showToast({ message: 'Please correct all form errors.', type: 'error' });
+        }
+    };
+
+    if (formSubmitted) {
+        return (
+            <div className="full-screen-view">
+                <div className="form-success-animation">
+                    <div className="success-check-icon">✓</div>
+                    <h3>{isEditMode ? 'Order Updated!' : 'Order Placed!'}</h3>
+                    <p className="text-muted">Redirecting you to your orders...</p>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="full-screen-view">
+            <div className="full-screen-header">
+                <button className="back-button" onClick={() => navigate('ordersList')}><BackIcon /> Back to Orders</button>
+                <h2>{isEditMode ? `Edit Order #${orderToEdit.id.substring(0, 6).toUpperCase()}` : 'Place New Order'}</h2>
+            </div>
+            <div className="form-container">
+                <div className="form-step-indicator">
+                    <div className={`form-step ${currentStep === 1 ? 'active' : ''} ${currentStep > 1 ? 'completed' : ''}`}>
+                        <div className="form-step-circle">1</div>
+                        <div className="form-step-label">Details</div>
+                    </div>
+                    <div className={`form-step-line`}></div>
+                    <div className={`form-step ${currentStep === 2 ? 'active' : ''} ${currentStep > 2 ? 'completed' : ''}`}>
+                        <div className="form-step-circle">2</div>
+                        <div className="form-step-label">Items</div>
+                    </div>
+                    <div className={`form-step-line`}></div>
+                    <div className={`form-step ${currentStep === 3 ? 'active' : ''}`}>
+                        <div className="form-step-circle">3</div>
+                        <div className="form-step-label">Review</div>
+                    </div>
+                </div>
+
+                <form onSubmit={handleSubmit}>
+                    {currentStep === 1 && (
+                        <div>
+                            <h3>Order Details</h3>
+                            <div className="form-group">
+                                <label htmlFor="scheduledDate">Scheduled Date</label>
+                                <div className="input-wrapper">
+                                    <CalendarIcon className="input-icon" />
+                                    <input
+                                        type="date"
+                                        id="scheduledDate"
+                                        name="scheduledDate"
+                                        className={`input-field ${errors.scheduledDate ? 'error' : ''}`}
+                                        value={formData.scheduledDate}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                {errors.scheduledDate && <div className="validation-error">{errors.scheduledDate}</div>}
+                            </div>
+                            <div className="form-group">
+                                <label>Delivery Option</label>
+                                <div className="radio-group">
+                                    <label className="radio-option">
+                                        <input
+                                            type="radio"
+                                            name="deliveryOption"
+                                            value="Doorstep"
+                                            checked={formData.deliveryOption === 'Doorstep'}
+                                            onChange={handleChange}
+                                        />
+                                        Doorstep Delivery
+                                    </label>
+                                    <label className="radio-option">
+                                        <input
+                                            type="radio"
+                                            name="deliveryOption"
+                                            value="Customer Pickup"
+                                            checked={formData.deliveryOption === 'Customer Pickup'}
+                                            onChange={handleChange}
+                                        />
+                                        Customer Pickup
+                                    </label>
+                                </div>
+                                {errors.deliveryOption && <div className="validation-error">{errors.deliveryOption}</div>}
+                            </div>
+                            {formData.deliveryOption === 'Doorstep' && (
+                                <div className="form-group">
+                                    <label htmlFor="deliveryAddress">Delivery Address</label>
+                                    <textarea
+                                        id="deliveryAddress"
+                                        name="deliveryAddress"
+                                        className={`input-field ${errors.deliveryAddress ? 'error' : ''}`}
+                                        value={formData.deliveryAddress}
+                                        onChange={handleChange}
+                                    ></textarea>
+                                    {errors.deliveryAddress && <div className="validation-error">{errors.deliveryAddress}</div>}
+                                </div>
+                            )}
+                            {formData.deliveryOption === 'Customer Pickup' && (
+                                <div className="form-group">
+                                    <label htmlFor="pickupAddress">Pickup Address</label>
+                                    <input
+                                        type="text"
+                                        id="pickupAddress"
+                                        name="pickupAddress"
+                                        className={`input-field ${errors.pickupAddress ? 'error' : ''}`}
+                                        value={formData.pickupAddress}
+                                        onChange={handleChange}
+                                        placeholder="E.g., 123 Main St, SP Center"
+                                    />
+                                    {errors.pickupAddress && <div className="validation-error">{errors.pickupAddress}</div>}
+                                </div>
+                            )}
+                            <div className="form-group">
+                                <label htmlFor="notes">Special Notes</label>
+                                <textarea
+                                    id="notes"
+                                    name="notes"
+                                    className="input-field"
+                                    value={formData.notes}
+                                    onChange={handleChange}
+                                ></textarea>
+                            </div>
+                        </div>
+                    )}
+
+                    {currentStep === 2 && (
+                        <div>
+                            <h3>Select Items</h3>
+                            {formData.items.map((item, index) => (
+                                <div key={index} className="detail-section-card mb-md flex-row items-center gap-md">
+                                    <div style={{flexGrow: 1}}>
+                                        <div className="form-group">
+                                            <label htmlFor={`itemType-${index}`}>Cloth Type</label>
+                                            <select
+                                                id={`itemType-${index}`}
+                                                name="type"
+                                                className={`input-field ${errors.items ? 'error' : ''}`}
+                                                value={item.type}
+                                                onChange={(e) => handleItemChange(index, e)}
+                                            >
+                                                <option value="">Select Type</option>
+                                                {availableClothTypes.map(type => (
+                                                    <option key={type} value={type}>{type}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor={`itemQuantity-${index}`}>Quantity</label>
+                                            <input
+                                                type="number"
+                                                id={`itemQuantity-${index}`}
+                                                name="quantity"
+                                                className={`input-field ${errors.items ? 'error' : ''}`}
+                                                value={item.quantity}
+                                                onChange={(e) => handleItemChange(index, e)}
+                                                min="1"
+                                            />
+                                        </div>
+                                        <p>Price: ${item.price.toFixed(2)}</p>
+                                    </div>
+                                    <button type="button" className="btn btn-secondary" onClick={() => removeItem(index)} style={{alignSelf: 'flex-start', marginTop: 'var(--spacing-xl)'}}>Remove</button>
+                                </div>
+                            ))}
+                            {errors.items && <div className="validation-error">{errors.items}</div>}
+                            <button type="button" className="btn btn-primary" onClick={addItem}><PlusIcon /> Add Item</button>
+                        </div>
+                    )}
+
+                    {currentStep === 3 && (
+                        <div>
+                            <h3>Review Order</h3>
+                            <div className="detail-section-card mb-md">
+                                <h4>Order Summary</h4>
+                                <div className="detail-item"><span className="detail-item-label">Scheduled Date:</span><span className="detail-item-value">{formData.scheduledDate}</span></div>
+                                <div className="detail-item"><span className="detail-item-label">Delivery Option:</span><span className="detail-item-value">{formData.deliveryOption}</span></div>
+                                {formData.deliveryOption === 'Doorstep' && <div className="detail-item"><span className="detail-item-label">Address:</span><span className="detail-item-value">{formData.deliveryAddress}</span></div>}
+                                {formData.deliveryOption === 'Customer Pickup' && <div className="detail-item"><span className="detail-item-label">Pickup:</span><span className="detail-item-value">{formData.pickupAddress}</span></div>}
+                                <div className="detail-item"><span className="detail-item-label">Notes:</span><span className="detail-item-value">{formData.notes || 'N/A'}</span></div>
+                            </div>
+                            <div className="detail-section-card">
+                                <h4>Items to Iron</h4>
+                                <ul className="items-list">
+                                    {formData.items.map((item, index) => (
+                                        <li key={index}><span>{item.type} ({item.quantity} {item.unit})</span><span>${item.price.toFixed(2)}</span></li>
+                                    ))}
+                                </ul>
+                                <div className="detail-item" style={{ marginTop: 'var(--spacing-md)', fontWeight: 'bold' }}>
+                                    <span className="detail-item-label">Total Amount:</span>
+                                    <span className="detail-item-value">${formData.items.reduce((sum, item) => sum + item.price, 0).toFixed(2)}</span>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    <div className="form-actions">
+                        {currentStep > 1 && <button type="button" className="btn btn-secondary" onClick={prevStep}>Previous</button>}
+                        {currentStep < 3 && <button type="button" className="btn btn-primary" onClick={nextStep}>Next</button>}
+                        {currentStep === 3 && <button type="submit" className="btn btn-primary">{isEditMode ? 'Update Order' : 'Place Order'}</button>}
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
+};
+
+const RateSetupForm = ({ currentUser, navigate, pricing, onUpdatePricing, showToast }) => {
+    if (currentUser.role !== 'Admin') return null;
+
+    const [currentPricing, setCurrentPricing] = useState(pricing);
+    const [errors, setErrors] = useState({});
+    const [formSubmitted, setFormSubmitted] = useState(false);
+
+    const handlePriceChange = (id, e) => {
+        const { name, value } = e.target;
+        setCurrentPricing(prev =>
+            prev.map(item =>
+                item.id === id ? { ...item, [name]: parseFloat(value) || 0 } : item
+            )
+        );
+    };
+
+    const validateForm = () => {
+        let newErrors = {};
+        currentPricing.forEach(item => {
+            if (item.pricePerKg <= 0) {
+                newErrors[`pricePerKg-${item.id}`] = 'Price must be positive.';
+            }
+        });
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (validateForm()) {
+            onUpdatePricing(currentPricing);
+            setFormSubmitted(true);
+            showToast({ message: 'Pricing updated successfully!', type: 'success' });
+            setTimeout(() => navigate('dashboard'), 2000);
+        } else {
+            showToast({ message: 'Please correct the pricing errors.', type: 'error' });
+        }
+    };
+
+    if (formSubmitted) {
+        return (
+            <div className="full-screen-view">
+                <div className="form-success-animation">
+                    <div className="success-check-icon">✓</div>
+                    <h3>Pricing Updated!</h3>
+                    <p className="text-muted">Redirecting to dashboard...</p>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="full-screen-view">
+            <div className="full-screen-header">
+                <button className="back-button" onClick={() => navigate('dashboard')}><BackIcon /> Back to Dashboard</button>
+                <h2>Pricing & Rate Setup</h2>
+            </div>
+            <div className="form-container">
+                <form onSubmit={handleSubmit}>
+                    <h3>Manage Cloth Type Rates</h3>
+                    {currentPricing.map(item => (
+                        <div key={item.id} className="detail-section-card mb-md">
+                            <div className="form-group flex-row items-center gap-md">
+                                <label style={{ minWidth: '120px' }}>{item.clothType} ({item.unit}):</label>
+                                <div className="input-wrapper" style={{ flexGrow: 1 }}>
+                                    <DollarSignIcon className="input-icon" />
+                                    <input
+                                        type="number"
+                                        name="pricePerKg"
+                                        className={`input-field ${errors[`pricePerKg-${item.id}`] ? 'error' : ''}`}
+                                        value={item.pricePerKg}
+                                        onChange={(e) => handlePriceChange(item.id, e)}
+                                        min="0"
+                                        step="0.01"
+                                    />
+                                </div>
+                            </div>
+                            {errors[`pricePerKg-${item.id}`] && <div className="validation-error">{errors[`pricePerKg-${item.id}`]}</div>}
+                        </div>
+                    ))}
+                    <div className="form-actions">
+                        <button type="button" className="btn btn-secondary" onClick={() => navigate('dashboard')}>Cancel</button>
+                        <button type="submit" className="btn btn-primary">Save Rates</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
+};
+
+const PartnerForm = ({ currentUser, navigate, partnerToEdit, onSavePartner, showToast }) => {
+    if (currentUser.role !== 'Admin') return null;
+
+    const isEditMode = !!partnerToEdit;
+    const [formData, setFormData] = useState({
+        name: isEditMode ? partnerToEdit.name : '',
+        email: isEditMode ? partnerToEdit.email : '',
+        contact: isEditMode ? partnerToEdit.contact : '',
+        location: isEditMode ? partnerToEdit.location : '',
+        status: isEditMode ? partnerToEdit.status : 'Active',
+    });
+    const [errors, setErrors] = useState({});
+    const [formSubmitted, setFormSubmitted] = useState(false);
+
+    const validateForm = () => {
+        let newErrors = {};
+        if (!formData.name) newErrors.name = 'Partner name is required.';
+        if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Valid email is required.';
+        if (!formData.contact) newErrors.contact = 'Contact number is required.';
+        if (!formData.location) newErrors.location = 'Location is required.';
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (validateForm()) {
+            const newPartner = {
+                ...partnerToEdit,
+                id: partnerToEdit ? partnerToEdit.id : generateId(),
+                ...formData,
+                rating: partnerToEdit ? partnerToEdit.rating : 4.5, // Dummy rating
+            };
+            onSavePartner(newPartner, isEditMode);
+            setFormSubmitted(true);
+            showToast({ message: isEditMode ? 'Partner updated successfully!' : 'Partner added successfully!', type: 'success' });
+            setTimeout(() => navigate('partnersList'), 2000);
+        } else {
+            showToast({ message: 'Please correct the form errors.', type: 'error' });
+        }
+    };
+
+    if (formSubmitted) {
+        return (
+            <div className="full-screen-view">
+                <div className="form-success-animation">
+                    <div className="success-check-icon">✓</div>
+                    <h3>{isEditMode ? 'Partner Updated!' : 'Partner Added!'}</h3>
+                    <p className="text-muted">Redirecting to partners list...</p>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="full-screen-view">
+            <div className="full-screen-header">
+                <button className="back-button" onClick={() => navigate('partnersList')}><BackIcon /> Back to Partners</button>
+                <h2>{isEditMode ? `Edit Partner: ${partnerToEdit.name}` : 'Add New Partner'}</h2>
+            </div>
+            <div className="form-container">
+                <form onSubmit={handleSubmit}>
+                    <h3>Partner Details</h3>
+                    <div className="form-group">
+                        <label htmlFor="name">Partner Name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            className={`input-field ${errors.name ? 'error' : ''}`}
+                            value={formData.name}
+                            onChange={handleChange}
+                            placeholder="E.g., IronFast Services"
+                        />
+                        {errors.name && <div className="validation-error">{errors.name}</div>}
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            className={`input-field ${errors.email ? 'error' : ''}`}
+                            value={formData.email}
+                            onChange={handleChange}
+                            placeholder="partner@example.com"
+                        />
+                        {errors.email && <div className="validation-error">{errors.email}</div>}
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="contact">Contact Number</label>
+                        <input
+                            type="tel"
+                            id="contact"
+                            name="contact"
+                            className={`input-field ${errors.contact ? 'error' : ''}`}
+                            value={formData.contact}
+                            onChange={handleChange}
+                            placeholder="555-123-4567"
+                        />
+                        {errors.contact && <div className="validation-error">{errors.contact}</div>}
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="location">Location</label>
+                        <input
+                            type="text"
+                            id="location"
+                            name="location"
+                            className={`input-field ${errors.location ? 'error' : ''}`}
+                            value={formData.location}
+                            onChange={handleChange}
+                            placeholder="E.g., Downtown, City"
+                        />
+                        {errors.location && <div className="validation-error">{errors.location}</div>}
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="status">Status</label>
+                        <select
+                            id="status"
+                            name="status"
+                            className="input-field"
+                            value={formData.status}
+                            onChange={handleChange}
+                        >
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+                    <div className="form-actions">
+                        <button type="button" className="btn btn-secondary" onClick={() => navigate('partnersList')}>Cancel</button>
+                        <button type="submit" className="btn btn-primary">{isEditMode ? 'Update Partner' : 'Add Partner'}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
+};
+
+// --- Main App Component ---
+const App = () => {
+    const [currentUser, setCurrentUser] = useState(null);
+    const [currentView, setCurrentView] = useState('login'); // 'login', 'dashboard', 'ordersList', 'orderDetail', 'orderForm', 'partnersList', 'partnerDetail', 'rateSetupForm'
+    const [previousView, setPreviousView] = useState('dashboard'); // To enable "Back" button
+    const [selectedRecordId, setSelectedRecordId] = useState(null);
+    const [viewFilters, setViewFilters] = useState(null); // Filters specific to a list view
+    const [toast, setToast] = useState(null);
+
+    const [orders, setOrders] = useState(initialOrders);
+    const [partners, setPartners] = useState(dummyServiceProviders); // Using dummyServiceProviders as initial partners
+    const [activities, setActivities] = useState(initialActivities);
+    const [notifications, setNotifications] = useState(initialNotifications);
+    const [pricing, setPricing] = useState(initialPricing);
+
+    const showToast = useCallback(({ message, type = 'info' }) => {
+        setToast({ message, type });
+        const timer = setTimeout(() => setToast(null), 4500); // Allow toast animation to complete
+        return () => clearTimeout(timer);
+    }, []);
+
+    const loginUser = (user) => {
+        setCurrentUser(user);
+        navigate('dashboard');
+    };
+
+    const logoutUser = () => {
+        setCurrentUser(null);
+        setCurrentView('login');
+        setSelectedRecordId(null);
+        setToast(null);
+    };
+
+    const navigate = useCallback((view, id = null, filters = null) => {
+        setPreviousView(currentView); // Save current view for back navigation
+        setCurrentView(view);
+        setSelectedRecordId(id);
+        setViewFilters(filters);
+    }, [currentView]);
+
+    const checkPermission = useCallback((allowedRoles) => {
+        return currentUser && allowedRoles.includes(currentUser.role);
+    }, [currentUser]);
+
+    const handleSaveOrder = useCallback((updatedOrder, isEditMode) => {
+        setOrders(prevOrders => {
+            if (isEditMode) {
+                return prevOrders.map(o => o.id === updatedOrder.id ? updatedOrder : o);
+            } else {
+                return [updatedOrder, ...prevOrders];
+            }
+        });
+        setActivities(prev => [{
+            id: generateId(),
+            role: currentUser.role,
+            type: isEditMode ? 'Order Updated' : 'New Order',
+            description: `${isEditMode ? 'Updated' : 'New'} order #${updatedOrder.id.substring(0, 6).toUpperCase()} by ${updatedOrder.customerName}`,
+            timestamp: new Date().toISOString(),
+            orderId: updatedOrder.id,
+        }, ...prev]);
+        setNotifications(prev => [{
+            id: generateId(),
+            userId: 'admin', // Notify admin of new/updated order
+            message: `${isEditMode ? 'Order Updated' : 'New Order'} #${updatedOrder.id.substring(0, 6).toUpperCase()} by ${updatedOrder.customerName}`,
+            type: isEditMode ? 'info' : 'action',
+            read: false,
+            timestamp: new Date().toISOString(),
+        }, ...prev]);
+    }, [currentUser, showToast]);
+
+    const handleUpdateOrderStatus = useCallback((orderId, newStatus) => {
+        setOrders(prevOrders => prevOrders.map(order => {
+            if (order.id === orderId) {
+                const updatedOrder = {
+                    ...order,
+                    status: newStatus,
+                    timeline: [...order.timeline, { status: newStatus, timestamp: new Date().toISOString(), actor: currentUser.name }],
+                    completedDate: (newStatus === 'Delivered' || newStatus === 'Picked') ? new Date().toISOString() : order.completedDate,
+                };
+                return updatedOrder;
+            }
+            return order;
+        }));
+        setActivities(prev => [{
+            id: generateId(),
+            role: currentUser.role,
+            type: `Order ${newStatus}`,
+            description: `Order #${orderId.substring(0, 6).toUpperCase()} status changed to ${newStatus}`,
+            timestamp: new Date().toISOString(),
+            orderId: orderId,
+        }, ...prev]);
+        showToast({ message: `Order #${orderId.substring(0, 6).toUpperCase()} status updated to ${newStatus}`, type: 'success' });
+    }, [currentUser, showToast]);
+
+    const handleSavePartner = useCallback((updatedPartner, isEditMode) => {
+        setPartners(prevPartners => {
+            if (isEditMode) {
+                return prevPartners.map(p => p.id === updatedPartner.id ? updatedPartner : p);
+            } else {
+                return [updatedPartner, ...prevPartners];
+            }
+        });
+        setActivities(prev => [{
+            id: generateId(),
+            role: currentUser.role,
+            type: isEditMode ? 'Partner Updated' : 'New Partner',
+            description: `${isEditMode ? 'Updated' : 'New'} partner: ${updatedPartner.name}`,
+            timestamp: new Date().toISOString(),
+            partnerId: updatedPartner.id,
+        }, ...prev]);
+        showToast({ message: isEditMode ? 'Partner updated!' : 'Partner added!', type: 'success' });
+    }, [currentUser, showToast]);
+
+    const handleUpdatePricing = useCallback((updatedPricing) => {
+        setPricing(updatedPricing.map(p => ({ ...p, lastUpdated: new Date().toISOString() })));
+        setActivities(prev => [{
+            id: generateId(),
+            role: currentUser.role,
+            type: 'Pricing Updated',
+            description: 'Laundry pricing rates were updated.',
+            timestamp: new Date().toISOString(),
+        }, ...prev]);
+        showToast({ message: 'Pricing rates updated!', type: 'success' });
+    }, [currentUser, showToast]);
+
+    const handleGlobalSearch = (query) => {
+        // In a real app, this would trigger a global search API call.
+        // For prototype, it's just a placeholder for the UI element.
+        // Actual filtering happens within list components based on their local search states.
+        console.log("Global search query:", query);
+    };
+
+    let content;
+    if (!currentUser) {
+        content = <AuthScreen setCurrentUser={loginUser} />;
+    } else {
+        const selectedOrder = selectedRecordId ? orders.find(o => o.id === selectedRecordId) : null;
+        const selectedPartner = selectedRecordId ? partners.find(p => p.id === selectedRecordId) : null;
+
+        switch (currentView) {
+            case 'dashboard':
+                if (checkPermission(['Admin'])) {
+                    content = <AdminDashboard orders={orders} partners={partners} navigate={navigate} />;
+                } else if (checkPermission(['Customer'])) {
+                    content = <CustomerDashboard orders={orders} navigate={navigate} />;
+                } else if (checkPermission(['ServiceProvider'])) {
+                    content = <ServiceProviderDashboard orders={orders} navigate={navigate} onUpdateOrderStatus={handleUpdateOrderStatus} />;
+                } else {
+                    content = <p>Access Denied</p>;
+                }
+                break;
+            case 'ordersList':
+                if (checkPermission(['Admin', 'Customer', 'ServiceProvider'])) {
+                    content = <OrdersList orders={orders} currentUser={currentUser} navigate={navigate} filters={viewFilters} setFilters={setViewFilters} />;
+                } else {
+                    content = <p>Access Denied</p>;
+                }
+                break;
+            case 'orderDetail':
+                if (checkPermission(['Admin', 'Customer', 'ServiceProvider'])) {
+                    content = <OrderDetail order={selectedOrder} currentUser={currentUser} navigate={navigate} onUpdateOrder={handleSaveOrder} />;
+                } else {
+                    content = <p>Access Denied</p>;
+                }
+                break;
+            case 'orderForm':
+                if (checkPermission(['Customer', 'Admin'])) { // Customer can create, Admin can edit
+                    content = <OrderForm
+                        currentUser={currentUser}
+                        navigate={navigate}
+                        orderToEdit={selectedOrder}
+                        onSaveOrder={handleSaveOrder}
+                        showToast={showToast}
+                        pricing={pricing}
+                    />;
+                } else {
+                    content = <p>Access Denied</p>;
+                }
+                break;
+            case 'partnersList':
+                if (checkPermission(['Admin'])) {
+                    content = <PartnersList partners={partners} currentUser={currentUser} navigate={navigate} />;
+                } else {
+                    content = <p>Access Denied</p>;
+                }
+                break;
+            case 'partnerDetail':
+                if (checkPermission(['Admin'])) {
+                    content = <PartnerDetail partner={selectedPartner} currentUser={currentUser} navigate={navigate} onUpdatePartner={handleSavePartner} />;
+                } else {
+                    content = <p>Access Denied</p>;
+                }
+                break;
+            case 'partnerForm':
+                if (checkPermission(['Admin'])) {
+                    content = <PartnerForm partnerToEdit={selectedPartner} currentUser={currentUser} navigate={navigate} onSavePartner={handleSavePartner} showToast={showToast} />;
+                } else {
+                    content = <p>Access Denied</p>;
+                }
+                break;
+            case 'rateSetupForm':
+                if (checkPermission(['Admin'])) {
+                    content = <RateSetupForm pricing={pricing} currentUser={currentUser} navigate={navigate} onUpdatePricing={handleUpdatePricing} showToast={showToast} />;
+                } else {
+                    content = <p>Access Denied</p>;
+                }
+                break;
+            default:
+                content = <p>Page Not Found or Access Denied</p>;
+        }
+    }
+
+    return (
+        <div className="app-container">
+            {currentUser && <Header currentUser={currentUser} navigate={navigate} notifications={notifications} onLogout={logoutUser} onSearch={handleGlobalSearch} />}
+            <main className="main-content">
+                {content}
+            </main>
+            {currentUser && currentView !== 'login' && <RecentActivities activities={activities} currentUser={currentUser} navigate={navigate} />}
+            {toast && <ToastNotification message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
+        </div>
+    );
+};
+
+export default App;
